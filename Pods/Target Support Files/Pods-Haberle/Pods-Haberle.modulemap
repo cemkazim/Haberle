@@ -1,0 +1,6 @@
+framework module Pods_Haberle {
+  umbrella header "Pods-Haberle-umbrella.h"
+
+  export *
+  module * { export * }
+}
