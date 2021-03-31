@@ -3,15 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764092614CA16001C6222 /* AppDelegate.swift */; };
 		00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7640B2614CA16001C6222 /* SceneDelegate.swift */; };
-		00E7640E2614CA16001C6222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7640D2614CA16001C6222 /* ViewController.swift */; };
 		00E764132614CA1A001C6222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00E764122614CA1A001C6222 /* Assets.xcassets */; };
 		00E764162614CA1A001C6222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00E764142614CA1A001C6222 /* LaunchScreen.storyboard */; };
+		00E764332614CCFE001C6222 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764302614CCFE001C6222 /* MainViewController.swift */; };
+		00E764342614CCFE001C6222 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764312614CCFE001C6222 /* MainModel.swift */; };
+		00E764352614CCFE001C6222 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764322614CCFE001C6222 /* MainViewModel.swift */; };
+		00E7643A2614D364001C6222 /* BaseNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764392614D364001C6222 /* BaseNetworkLayer.swift */; };
+		00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7643E2614D37E001C6222 /* MainServiceLayer.swift */; };
+		00E764472614D43F001C6222 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764462614D43F001C6222 /* Constants.swift */; };
+		00E7644C2614D487001C6222 /* APIModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7644B2614D487001C6222 /* APIModules.swift */; };
 		23297B39D8C00D3535DE55DA /* Pods_Haberle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F052DF8A273289EBD6449A6F /* Pods_Haberle.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,10 +25,16 @@
 		00E764062614CA16001C6222 /* Haberle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Haberle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E764092614CA16001C6222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00E7640B2614CA16001C6222 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		00E7640D2614CA16001C6222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		00E764122614CA1A001C6222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00E764152614CA1A001C6222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00E764172614CA1A001C6222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E764302614CCFE001C6222 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		00E764312614CCFE001C6222 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		00E764322614CCFE001C6222 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		00E764392614D364001C6222 /* BaseNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkLayer.swift; sourceTree = "<group>"; };
+		00E7643E2614D37E001C6222 /* MainServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServiceLayer.swift; sourceTree = "<group>"; };
+		00E764462614D43F001C6222 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		00E7644B2614D487001C6222 /* APIModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModules.swift; sourceTree = "<group>"; };
 		13D2E82B23EA4945AD361EF9 /* Pods-Haberle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haberle.release.xcconfig"; path = "Target Support Files/Pods-Haberle/Pods-Haberle.release.xcconfig"; sourceTree = "<group>"; };
 		962354ACC7B26F899973AE14 /* Pods-Haberle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haberle.debug.xcconfig"; path = "Target Support Files/Pods-Haberle/Pods-Haberle.debug.xcconfig"; sourceTree = "<group>"; };
 		F052DF8A273289EBD6449A6F /* Pods_Haberle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Haberle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +73,7 @@
 		00E764082614CA16001C6222 /* Haberle */ = {
 			isa = PBXGroup;
 			children = (
-				00E7641E2614CA26001C6222 /* Controllers */,
+				00E7641E2614CA26001C6222 /* Scenes */,
 				00E764212614CA3A001C6222 /* Components */,
 				00E764202614CA32001C6222 /* Utilities */,
 				00E764222614CA40001C6222 /* Network */,
@@ -71,12 +83,12 @@
 			path = Haberle;
 			sourceTree = "<group>";
 		};
-		00E7641E2614CA26001C6222 /* Controllers */ = {
+		00E7641E2614CA26001C6222 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				00E7640D2614CA16001C6222 /* ViewController.swift */,
+				00E7642E2614CCDB001C6222 /* Main */,
 			);
-			path = Controllers;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		00E7641F2614CA2C001C6222 /* Supporting Files */ = {
@@ -93,6 +105,8 @@
 		00E764202614CA32001C6222 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				00E764452614D430001C6222 /* Constants */,
+				00E7644A2614D476001C6222 /* Parameters */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -107,8 +121,60 @@
 		00E764222614CA40001C6222 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				00E764372614D32F001C6222 /* APILayer */,
+				00E764382614D33A001C6222 /* ServiceLayer */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		00E7642E2614CCDB001C6222 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				00E764302614CCFE001C6222 /* MainViewController.swift */,
+				00E764322614CCFE001C6222 /* MainViewModel.swift */,
+				00E764312614CCFE001C6222 /* MainModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		00E764372614D32F001C6222 /* APILayer */ = {
+			isa = PBXGroup;
+			children = (
+				00E764392614D364001C6222 /* BaseNetworkLayer.swift */,
+			);
+			path = APILayer;
+			sourceTree = "<group>";
+		};
+		00E764382614D33A001C6222 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				00E7643D2614D371001C6222 /* Main */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		00E7643D2614D371001C6222 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				00E7643E2614D37E001C6222 /* MainServiceLayer.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		00E764452614D430001C6222 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				00E764462614D43F001C6222 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		00E7644A2614D476001C6222 /* Parameters */ = {
+			isa = PBXGroup;
+			children = (
+				00E7644B2614D487001C6222 /* APIModules.swift */,
+			);
+			path = Parameters;
 			sourceTree = "<group>";
 		};
 		1BEF1ED6AE1C7ABD918A0BEB /* Pods */ = {
@@ -139,6 +205,7 @@
 				00E764022614CA16001C6222 /* Sources */,
 				00E764032614CA16001C6222 /* Frameworks */,
 				00E764042614CA16001C6222 /* Resources */,
+				84CAF9482D4F14C145723A2F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,6 +283,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		84CAF9482D4F14C145723A2F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haberle/Pods-Haberle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haberle/Pods-Haberle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Haberle/Pods-Haberle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -223,9 +307,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E7640E2614CA16001C6222 /* ViewController.swift in Sources */,
+				00E764352614CCFE001C6222 /* MainViewModel.swift in Sources */,
+				00E764342614CCFE001C6222 /* MainModel.swift in Sources */,
+				00E764332614CCFE001C6222 /* MainViewController.swift in Sources */,
 				00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */,
+				00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */,
+				00E7644C2614D487001C6222 /* APIModules.swift in Sources */,
 				00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */,
+				00E7643A2614D364001C6222 /* BaseNetworkLayer.swift in Sources */,
+				00E764472614D43F001C6222 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
