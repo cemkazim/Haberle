@@ -14,6 +14,11 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties -
     
+    lazy var cardViewComponent: MainCardViewComponent = {
+        let component = MainCardViewComponent()
+        component.translatesAutoresizingMaskIntoConstraints = false
+        return component
+    }()
     lazy var viewModel: MainViewModel = {
         let viewModel = MainViewModel()
         viewModel.delegate = self
@@ -24,14 +29,23 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
     }
     
     // MARK: - Methods -
+    
+    func setupView() {
+        view.addSubview(cardViewComponent)
+        view.backgroundColor = .white
+        navigationItem.title = Constants.mainNavigationItemTitle
+    }
 }
+
+// MARK: - MainViewController: MainViewModelDelegate -
 
 extension MainViewController: MainViewModelDelegate {
     
-    func setMainData(_ mainResultData: [MainModel]) {
-        print(mainResultData)
+    func setMainData(_ mainResult: [MainResultModel]) {
+        print(mainResult)
     }
 }

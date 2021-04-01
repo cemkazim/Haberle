@@ -9,5 +9,5 @@ import Foundation
 
 struct Constants {
     
-    static let example = "Selamlar"
+    static let mainNavigationItemTitle = "Haberler"
 }

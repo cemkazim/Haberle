@@ -11,44 +11,47 @@
 import Foundation
 
 protocol MainViewModelDelegate: class {
-    func setMainData(_ mainResultData: [MainModel])
+    func setMainData(_ mainResult: [MainResultModel])
 }
 
 class MainViewModel {
     
     // MARK: - Properties -
     
-    var mainResultModel: MainResultModel?
+    var mainResultList = [MainResultModel]()
     weak var delegate: MainViewModelDelegate?
     
     // MARK: - Initialize -
     
-    init() {}
+    init() {
+        getMainData(currentPage: 0)
+    }
     
     // MARK: - Methods -
     
-    func getData() {
-        MainServiceLayer.shared.getMainData(pageNumber: 0, completionHandler: { [weak self] (data) in
+    func getMainData(currentPage: Int) {
+        MainServiceLayer.shared.getMainData(pageNumber: currentPage, completionHandler: { [weak self] (data) in
             guard let self = self else { return }
-            self.handleMainResponse(data)
-            self.delegate?.setMainData(data)
+            self.getMainResponse(data)
         }, errorHandler: { (error) in
             print(error)
         })
     }
     
-    func handleMainResponse(_ mainResponseData: [MainModel]) {
-        for data in mainResponseData {
+    func getMainResponse(_ responseData: [MainModel]) {
+        for data in responseData {
             if let response = data.response {
-                handleMainResult(response)
+                getMainResult(response)
             }
         }
+        delegate?.setMainData(mainResultList)
     }
     
-    func handleMainResult(_ mainResultData: MainResponseModel) {
-        guard let results = mainResultData.results else { return }
+    func getMainResult(_ resultData: MainResponseModel) {
+        guard let results = resultData.results else { return }
         for data in results {
-            // TO DO: Pass the data to view controller sayın cemocum...
+            let model = MainResultModel(sectionName: data.sectionName, webTitle: data.webTitle, webUrl: data.webUrl)
+            mainResultList.append(model)
         }
     }
 }
