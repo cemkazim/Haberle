@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.backgroundView = UIView.init(frame: .zero)
         collectionView.decelerationRate = .fast
+        collectionView.isPagingEnabled = true
         return collectionView
     }()
     var mainViewModel: MainViewModel?
@@ -60,7 +61,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -87,11 +88,21 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 30
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        targetContentOffset.pointee = scrollView.contentOffset
+        var factor: CGFloat = 0.5
+        if velocity.x < 0 {
+            factor = -factor
+        }
+        let indexPath = IndexPath(row: Int((scrollView.contentOffset.x / 325 + factor)), section: 0)
+        mainCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
     }
 }
 
