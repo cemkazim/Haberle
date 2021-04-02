@@ -38,6 +38,16 @@ class MainViewController: UIViewController {
         view.addSubview(cardViewComponent)
         view.backgroundColor = .white
         navigationItem.title = Constants.mainNavigationItemTitle
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            cardViewComponent.topAnchor.constraint(equalTo: view.topAnchor),
+            cardViewComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cardViewComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cardViewComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 

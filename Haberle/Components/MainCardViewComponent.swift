@@ -16,12 +16,14 @@ class MainCardViewComponent: UIView {
         return view
     }()
     lazy var webView: WKWebView = {
-        let webView = WKWebView()
+        let webView = WKWebView(frame: .zero)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupComponent()
     }
     
     required init?(coder: NSCoder) {
@@ -30,9 +32,8 @@ class MainCardViewComponent: UIView {
     
     func setupComponent() {
         addSubview(containerView)
-        containerView.addSubview(webView)
-        setupConstraints()
         setupWebView()
+        setupConstraints()
     }
     
     func setupConstraints() {
@@ -50,7 +51,13 @@ class MainCardViewComponent: UIView {
     }
     
     func setupWebView() {
-        guard let url = URL(string: "") else { return }
+        containerView.addSubview(webView)
+        getURL()
+    }
+    
+    func getURL() {
+        let dummyURL = "https://www.theguardian.com/politics/blog/2014/feb/17/alex-salmond-speech-first-minister-scottish-independence-eu-currency-live"
+        guard let url = URL(string: dummyURL) else { return }
         webView.load(URLRequest(url: url))
     }
 }
