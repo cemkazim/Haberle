@@ -32,16 +32,18 @@ class MainCardViewComponent: UIView {
     
     func setupComponent() {
         addSubview(containerView)
-        setupWebView()
+        containerView.addSubview(webView)
+        getWebViewURL()
         setupConstraints()
+        configureContainerView()
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
+            containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            containerView.heightAnchor.constraint(equalToConstant: 550),
+            containerView.widthAnchor.constraint(equalToConstant: 325),
             
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -50,12 +52,16 @@ class MainCardViewComponent: UIView {
         ])
     }
     
-    func setupWebView() {
-        containerView.addSubview(webView)
-        getURL()
+    func configureContainerView() {
+        containerView.clipsToBounds = true
+        containerView.layer.cornerRadius = 35
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 10
     }
     
-    func getURL() {
+    func getWebViewURL() {
         let dummyURL = "https://www.theguardian.com/politics/blog/2014/feb/17/alex-salmond-speech-first-minister-scottish-independence-eu-currency-live"
         guard let url = URL(string: dummyURL) else { return }
         webView.load(URLRequest(url: url))

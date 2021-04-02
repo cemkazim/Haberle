@@ -19,11 +19,7 @@ class MainViewController: UIViewController {
         component.translatesAutoresizingMaskIntoConstraints = false
         return component
     }()
-    lazy var viewModel: MainViewModel = {
-        let viewModel = MainViewModel()
-        viewModel.delegate = self
-        return viewModel
-    }()
+    var mainViewModel: MainViewModel?
     
     // MARK: - Lifecycles -
     
@@ -36,6 +32,7 @@ class MainViewController: UIViewController {
     
     func setupView() {
         view.addSubview(cardViewComponent)
+        mainViewModel = MainViewModel(delegate: self)
         view.backgroundColor = .white
         navigationItem.title = Constants.mainNavigationItemTitle
         setupConstraints()
@@ -43,10 +40,10 @@ class MainViewController: UIViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            cardViewComponent.topAnchor.constraint(equalTo: view.topAnchor),
+            cardViewComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             cardViewComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardViewComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            cardViewComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            cardViewComponent.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

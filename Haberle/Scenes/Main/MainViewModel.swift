@@ -23,8 +23,9 @@ class MainViewModel {
     
     // MARK: - Initialize -
     
-    init() {
-        getMainData(currentPage: 0)
+    init(delegate: MainViewModelDelegate) {
+        self.delegate = delegate
+        getMainData(currentPage: 1)
     }
     
     // MARK: - Methods -

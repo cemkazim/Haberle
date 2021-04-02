@@ -16,12 +16,8 @@ class MainServiceLayer {
     private init() {}
     
     func getMainData(pageNumber: Int, completionHandler: @escaping ([MainModel]) -> Void, errorHandler: @escaping (Error) -> Void) {
-        BaseNetworkLayer
-            .shared
-            .request(requestUrl: setMainRequestURL(with: pageNumber),
-                     requestMethod: .get)
-            .subscribe(onNext: { (data) in
-            completionHandler(data)
+        BaseNetworkLayer.shared.request(requestUrl: setMainRequestURL(with: pageNumber), requestMethod: .get).subscribe(onNext: { (data: MainModel) in
+            completionHandler([data])
         }, onError: { (error: Error) in
             errorHandler(error)
         }).disposed(by: disposeBag)
