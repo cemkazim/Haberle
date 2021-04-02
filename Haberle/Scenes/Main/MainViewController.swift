@@ -14,10 +14,22 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties -
     
-    lazy var cardViewComponent: MainCardViewComponent = {
-        let component = MainCardViewComponent()
-        component.translatesAutoresizingMaskIntoConstraints = false
-        return component
+    lazy var mainCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 325, height: 550)
+        flowLayout.estimatedItemSize = CGSize(width: 325, height: 550)
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.setCollectionViewLayout(flowLayout, animated: true)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.mainCollectionViewCellId)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.backgroundView = UIView.init(frame: .zero)
+        collectionView.decelerationRate = .fast
+        return collectionView
     }()
     var mainViewModel: MainViewModel?
     
@@ -31,7 +43,7 @@ class MainViewController: UIViewController {
     // MARK: - Methods -
     
     func setupView() {
-        view.addSubview(cardViewComponent)
+        view.addSubview(mainCollectionView)
         mainViewModel = MainViewModel(delegate: self)
         view.backgroundColor = .white
         navigationItem.title = Constants.mainNavigationItemTitle
@@ -40,11 +52,46 @@ class MainViewController: UIViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            cardViewComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            cardViewComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            cardViewComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            cardViewComponent.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            mainCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mainViewModel?.webViewUrlList.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.mainCollectionViewCellId, for: indexPath) as? MainCollectionViewCell {
+            if let strongURL = mainViewModel?.webViewUrlList[indexPath.item], let stringToURL = URL(string: strongURL) {
+                let rawURL = URLRequest(url: stringToURL)
+                cell.webView.load(rawURL)
+            }
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 325, height: 550)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
 }
 
@@ -53,6 +100,9 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewModelDelegate {
     
     func setMainData(_ mainResult: [MainResultModel]) {
-        print(mainResult)
+        for result in mainResult {
+            mainViewModel?.webViewUrlList.append(result.webUrl ?? "")
+        }
+        mainCollectionView.reloadData()
     }
 }

@@ -19,6 +19,7 @@ class MainViewModel {
     // MARK: - Properties -
     
     var mainResultList = [MainResultModel]()
+    var webViewUrlList = [String]()
     weak var delegate: MainViewModelDelegate?
     
     // MARK: - Initialize -

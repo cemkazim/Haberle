@@ -11,3 +11,8 @@ struct Constants {
     
     static let mainNavigationItemTitle = "Haberler"
 }
+
+struct CellIdentifiers {
+    
+    static let mainCollectionViewCellId = "MainCollectionViewCellId"
+}

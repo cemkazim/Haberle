@@ -1,14 +1,14 @@
 //
-//  MainCardViewComponent.swift
+//  MainCollectionViewCell.swift
 //  Haberle
 //
-//  Created by Cem Kazım on 31.03.2021.
+//  Created by Cem Kazım on 2.04.2021.
 //
 
 import UIKit
 import WebKit
 
-class MainCardViewComponent: UIView {
+class MainCollectionViewCell: UICollectionViewCell {
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -33,17 +33,16 @@ class MainCardViewComponent: UIView {
     func setupComponent() {
         addSubview(containerView)
         containerView.addSubview(webView)
-        getWebViewURL()
         setupConstraints()
         configureContainerView()
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
-            containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 550),
-            containerView.widthAnchor.constraint(equalToConstant: 325),
+            containerView.topAnchor.constraint(equalTo: topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -59,11 +58,5 @@ class MainCardViewComponent: UIView {
         layer.shadowOpacity = 0.5
         layer.shadowOffset = .zero
         layer.shadowRadius = 10
-    }
-    
-    func getWebViewURL() {
-        let dummyURL = "https://www.theguardian.com/politics/blog/2014/feb/17/alex-salmond-speech-first-minister-scottish-independence-eu-currency-live"
-        guard let url = URL(string: dummyURL) else { return }
-        webView.load(URLRequest(url: url))
     }
 }

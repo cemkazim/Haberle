@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00AFFB2B2617547A00D75FCE /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */; };
 		00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764092614CA16001C6222 /* AppDelegate.swift */; };
 		00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7640B2614CA16001C6222 /* SceneDelegate.swift */; };
 		00E764132614CA1A001C6222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00E764122614CA1A001C6222 /* Assets.xcassets */; };
@@ -18,11 +19,11 @@
 		00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7643E2614D37E001C6222 /* MainServiceLayer.swift */; };
 		00E764472614D43F001C6222 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764462614D43F001C6222 /* Constants.swift */; };
 		00E7644C2614D487001C6222 /* APIModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7644B2614D487001C6222 /* APIModules.swift */; };
-		00E764512614E8D0001C6222 /* MainCardViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764502614E8D0001C6222 /* MainCardViewComponent.swift */; };
 		23297B39D8C00D3535DE55DA /* Pods_Haberle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F052DF8A273289EBD6449A6F /* Pods_Haberle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		00E764062614CA16001C6222 /* Haberle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Haberle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E764092614CA16001C6222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00E7640B2614CA16001C6222 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,7 +37,6 @@
 		00E7643E2614D37E001C6222 /* MainServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServiceLayer.swift; sourceTree = "<group>"; };
 		00E764462614D43F001C6222 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00E7644B2614D487001C6222 /* APIModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModules.swift; sourceTree = "<group>"; };
-		00E764502614E8D0001C6222 /* MainCardViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCardViewComponent.swift; sourceTree = "<group>"; };
 		13D2E82B23EA4945AD361EF9 /* Pods-Haberle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haberle.release.xcconfig"; path = "Target Support Files/Pods-Haberle/Pods-Haberle.release.xcconfig"; sourceTree = "<group>"; };
 		962354ACC7B26F899973AE14 /* Pods-Haberle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haberle.debug.xcconfig"; path = "Target Support Files/Pods-Haberle/Pods-Haberle.debug.xcconfig"; sourceTree = "<group>"; };
 		F052DF8A273289EBD6449A6F /* Pods_Haberle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Haberle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +116,6 @@
 		00E764212614CA3A001C6222 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				00E764502614E8D0001C6222 /* MainCardViewComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -136,6 +135,7 @@
 				00E764302614CCFE001C6222 /* MainViewController.swift */,
 				00E764322614CCFE001C6222 /* MainViewModel.swift */,
 				00E764312614CCFE001C6222 /* MainModel.swift */,
+				00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -315,8 +315,8 @@
 				00E764332614CCFE001C6222 /* MainViewController.swift in Sources */,
 				00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */,
 				00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */,
-				00E764512614E8D0001C6222 /* MainCardViewComponent.swift in Sources */,
 				00E7644C2614D487001C6222 /* APIModules.swift in Sources */,
+				00AFFB2B2617547A00D75FCE /* MainCollectionViewCell.swift in Sources */,
 				00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */,
 				00E7643A2614D364001C6222 /* BaseNetworkLayer.swift in Sources */,
 				00E764472614D43F001C6222 /* Constants.swift in Sources */,
