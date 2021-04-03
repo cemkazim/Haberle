@@ -16,8 +16,6 @@ class MainViewController: UIViewController {
     
     lazy var mainCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 325, height: 550)
-        flowLayout.estimatedItemSize = CGSize(width: 325, height: 550)
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.setCollectionViewLayout(flowLayout, animated: true)
@@ -29,10 +27,10 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.backgroundView = UIView.init(frame: .zero)
         collectionView.decelerationRate = .fast
-        collectionView.isPagingEnabled = true
         return collectionView
     }()
     var mainViewModel: MainViewModel?
+    var minimumLineSpacing: CGFloat = 30
     
     // MARK: - Lifecycles -
     
@@ -68,15 +66,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainViewModel?.webViewUrlList.count ?? 0
+        return mainViewModel?.backgroundColorList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.mainCollectionViewCellId, for: indexPath) as? MainCollectionViewCell {
-            if let strongURL = mainViewModel?.webViewUrlList[indexPath.item], let stringToURL = URL(string: strongURL) {
-                let rawURL = URLRequest(url: stringToURL)
-                cell.webView.load(rawURL)
-            }
+            cell.containerView.backgroundColor = mainViewModel?.backgroundColorList[indexPath.row]
+            cell.titleLabel.text = mainViewModel?.mainResultList[indexPath.row].webTitle
             return cell
         } else {
             return UICollectionViewCell()
@@ -88,21 +84,30 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+        return minimumLineSpacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        targetContentOffset.pointee = scrollView.contentOffset
-        var factor: CGFloat = 0.5
-        if velocity.x < 0 {
-            factor = -factor
+        let pageWidth: CGFloat = 325 + minimumLineSpacing
+        let currentPageOffset: CGFloat = scrollView.contentOffset.x
+        let targetOffset: CGFloat = targetContentOffset.pointee.x
+        var newPageOffset: CGFloat = 0
+        if targetOffset > currentPageOffset {
+            newPageOffset = ceil(currentPageOffset / pageWidth) * pageWidth
+        } else {
+            newPageOffset = floor(currentPageOffset / pageWidth) * pageWidth
         }
-        let indexPath = IndexPath(row: Int((scrollView.contentOffset.x / 325 + factor)), section: 0)
-        mainCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        if newPageOffset < 0 {
+            newPageOffset = 0
+        } else if newPageOffset > scrollView.contentSize.width {
+            newPageOffset = scrollView.contentSize.width
+        }
+        targetContentOffset.pointee.x = currentPageOffset
+        scrollView.setContentOffset(CGPoint(x: newPageOffset, y: 0), animated: true)
     }
 }
 
@@ -112,7 +117,26 @@ extension MainViewController: MainViewModelDelegate {
     
     func setMainData(_ mainResult: [MainResultModel]) {
         for result in mainResult {
-            mainViewModel?.webViewUrlList.append(result.webUrl ?? "")
+            switch result.sectionName {
+            case MainBackgroundColorType.sport.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.sport.colorValue)
+            case MainBackgroundColorType.usNews.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.usNews.colorValue)
+            case MainBackgroundColorType.environment.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.environment.colorValue)
+            case MainBackgroundColorType.fashion.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.fashion.colorValue)
+            case MainBackgroundColorType.politics.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.politics.colorValue)
+            case MainBackgroundColorType.music.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.music.colorValue)
+            case MainBackgroundColorType.ukNews.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.ukNews.colorValue)
+            case MainBackgroundColorType.worldNews.rawValue:
+                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.worldNews.colorValue)
+            default:
+                return
+            }
         }
         mainCollectionView.reloadData()
     }

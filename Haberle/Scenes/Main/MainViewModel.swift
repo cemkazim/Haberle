@@ -8,7 +8,7 @@
 //  KeyZim-MVVM
 //
 
-import Foundation
+import UIKit
 
 protocol MainViewModelDelegate: class {
     func setMainData(_ mainResult: [MainResultModel])
@@ -19,7 +19,7 @@ class MainViewModel {
     // MARK: - Properties -
     
     var mainResultList = [MainResultModel]()
-    var webViewUrlList = [String]()
+    var backgroundColorList = [UIColor]()
     weak var delegate: MainViewModelDelegate?
     
     // MARK: - Initialize -

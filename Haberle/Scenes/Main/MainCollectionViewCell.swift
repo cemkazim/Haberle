@@ -15,10 +15,15 @@ class MainCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.text = "Title'sin bir mum alevinde o eski günler"
+        label.tintColor = .black
+        label.textAlignment = .left
+        label.numberOfLines = .zero
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -32,7 +37,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     func setupComponent() {
         addSubview(containerView)
-        containerView.addSubview(webView)
+        containerView.addSubview(titleLabel)
         setupConstraints()
         configureContainerView()
     }
@@ -44,10 +49,9 @@ class MainCollectionViewCell: UICollectionViewCell {
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            webView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            titleLabel.widthAnchor.constraint(equalToConstant: 305)
         ])
     }
     

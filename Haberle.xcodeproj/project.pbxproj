@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008BAC5326188E20006D759B /* MainBackgroundColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008BAC5226188E20006D759B /* MainBackgroundColorType.swift */; };
 		00AFFB2B2617547A00D75FCE /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */; };
 		00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764092614CA16001C6222 /* AppDelegate.swift */; };
 		00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7640B2614CA16001C6222 /* SceneDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		008BAC5226188E20006D759B /* MainBackgroundColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackgroundColorType.swift; sourceTree = "<group>"; };
 		00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		00E764062614CA16001C6222 /* Haberle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Haberle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E764092614CA16001C6222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				00E7641E2614CA26001C6222 /* Scenes */,
-				00E764212614CA3A001C6222 /* Components */,
 				00E764202614CA32001C6222 /* Utilities */,
 				00E764222614CA40001C6222 /* Network */,
 				00E7641F2614CA2C001C6222 /* Supporting Files */,
@@ -111,13 +112,6 @@
 				00E7644A2614D476001C6222 /* Parameters */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		00E764212614CA3A001C6222 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		00E764222614CA40001C6222 /* Network */ = {
@@ -168,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				00E764462614D43F001C6222 /* Constants.swift */,
+				008BAC5226188E20006D759B /* MainBackgroundColorType.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -316,6 +311,7 @@
 				00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */,
 				00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */,
 				00E7644C2614D487001C6222 /* APIModules.swift in Sources */,
+				008BAC5326188E20006D759B /* MainBackgroundColorType.swift in Sources */,
 				00AFFB2B2617547A00D75FCE /* MainCollectionViewCell.swift in Sources */,
 				00E7640C2614CA16001C6222 /* SceneDelegate.swift in Sources */,
 				00E7643A2614D364001C6222 /* BaseNetworkLayer.swift in Sources */,
