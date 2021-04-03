@@ -16,3 +16,8 @@ struct CellIdentifiers {
     
     static let mainCollectionViewCellId = "MainCollectionViewCellId"
 }
+
+struct ImageNames {
+    
+    static let dismissImageName = "dismiss"
+}

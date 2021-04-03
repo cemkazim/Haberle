@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0042B7A82618C4200006F858 /* NewsWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0042B7A72618C4200006F858 /* NewsWebViewController.swift */; };
 		008BAC5326188E20006D759B /* MainBackgroundColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008BAC5226188E20006D759B /* MainBackgroundColorType.swift */; };
 		00AFFB2B2617547A00D75FCE /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */; };
 		00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E764092614CA16001C6222 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0042B7A72618C4200006F858 /* NewsWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebViewController.swift; sourceTree = "<group>"; };
 		008BAC5226188E20006D759B /* MainBackgroundColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackgroundColorType.swift; sourceTree = "<group>"; };
 		00AFFB2A2617547A00D75FCE /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		00E764062614CA16001C6222 /* Haberle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Haberle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0042B7A62618C4040006F858 /* NewsWebView */ = {
+			isa = PBXGroup;
+			children = (
+				0042B7A72618C4200006F858 /* NewsWebViewController.swift */,
+			);
+			path = NewsWebView;
+			sourceTree = "<group>";
+		};
 		00E763FD2614CA16001C6222 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				00E7642E2614CCDB001C6222 /* Main */,
+				0042B7A62618C4040006F858 /* NewsWebView */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -307,6 +318,7 @@
 			files = (
 				00E764352614CCFE001C6222 /* MainViewModel.swift in Sources */,
 				00E764342614CCFE001C6222 /* MainModel.swift in Sources */,
+				0042B7A82618C4200006F858 /* NewsWebViewController.swift in Sources */,
 				00E764332614CCFE001C6222 /* MainViewController.swift in Sources */,
 				00E7640A2614CA16001C6222 /* AppDelegate.swift in Sources */,
 				00E7643F2614D37E001C6222 /* MainServiceLayer.swift in Sources */,

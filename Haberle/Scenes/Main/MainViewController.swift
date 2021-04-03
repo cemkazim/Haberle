@@ -59,6 +59,8 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate -
+
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -79,6 +81,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let webViewURL = mainViewModel?.mainResultList[indexPath.row].webUrl, let formattedURL = URL(string: webViewURL) {
+            let newsWebView = NewsWebViewController()
+            let loadedURL = URLRequest(url: formattedURL)
+            newsWebView.webView.load(loadedURL)
+            let rootViewController = UINavigationController(rootViewController: newsWebView)
+            present(rootViewController, animated: true, completion: nil)
+        } else {
+            print("error")
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 325, height: 550)
     }
@@ -88,7 +102,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 45)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

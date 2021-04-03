@@ -10,6 +10,8 @@ import WebKit
 
 class MainCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties -
+    
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,16 +28,20 @@ class MainCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Initialize -
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupComponent()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func setupComponent() {
+    // MARK: - Methods -
+    
+    func setupView() {
         addSubview(containerView)
         containerView.addSubview(titleLabel)
         setupConstraints()

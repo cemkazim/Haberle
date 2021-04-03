@@ -10,6 +10,8 @@
 
 import UIKit
 
+// MARK: - MainViewModelDelegate -
+
 protocol MainViewModelDelegate: class {
     func setMainData(_ mainResult: [MainResultModel])
 }
