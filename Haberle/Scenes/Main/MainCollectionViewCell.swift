@@ -22,7 +22,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.text = Constants.mainCollectionViewCellTitleText
-        label.tintColor = .white
+        label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = .zero
         return label
