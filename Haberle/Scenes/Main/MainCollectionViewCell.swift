@@ -21,8 +21,8 @@ class MainCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.text = "Title'sin bir mum alevinde o eski günler"
-        label.tintColor = .black
+        label.text = Constants.mainCollectionViewCellTitleText
+        label.tintColor = .white
         label.textAlignment = .left
         label.numberOfLines = .zero
         return label
@@ -57,7 +57,7 @@ class MainCollectionViewCell: UICollectionViewCell {
             
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.widthAnchor.constraint(equalToConstant: 305)
+            titleLabel.widthAnchor.constraint(equalToConstant: 5 * frame.width / 6)
         ])
     }
     

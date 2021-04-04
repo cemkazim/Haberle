@@ -9,7 +9,10 @@ import Foundation
 
 struct Constants {
     
-    static let mainNavigationItemTitle = "Haberler"
+    static let mainCollectionViewCellTitleText = "Title'sin bir mum alevinde o eski günler"
+    static let chooseACategoryText = "Choose a category"
+    static let cancelButtonText = "Cancel"
+    static let chooseButtonText = "Choose"
 }
 
 struct CellIdentifiers {

@@ -29,6 +29,14 @@ class MainViewController: UIViewController {
         collectionView.decelerationRate = .fast
         return collectionView
     }()
+    lazy var mainPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    var isFiltered = false
+    var mainTextField = UITextField()
     var mainViewModel: MainViewModel?
     
     // MARK: - Lifecycles -
@@ -44,8 +52,8 @@ class MainViewController: UIViewController {
         view.addSubview(mainCollectionView)
         mainViewModel = MainViewModel(delegate: self)
         view.backgroundColor = .white
-        navigationItem.title = Constants.mainNavigationItemTitle
         setupConstraints()
+        setupPickerView()
     }
     
     func setupConstraints() {
@@ -55,6 +63,46 @@ class MainViewController: UIViewController {
             mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    func setupPickerView() {
+        mainTextField.placeholder = Constants.chooseACategoryText
+        mainTextField.textAlignment = .center
+        view.addSubview(mainTextField)
+        navigationItem.titleView = mainTextField
+        mainTextField.inputView = mainPickerView
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.tintColor = .black
+        toolbar.sizeToFit()
+        let cancelButton = UIBarButtonItem(title: Constants.cancelButtonText, style: .done, target: self, action: #selector(cancelButtonTapped))
+        let chooseButton = UIBarButtonItem(title: Constants.chooseButtonText, style: .done, target: self, action: #selector(chooseButtonTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([cancelButton, flexibleSpace, chooseButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        mainTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func cancelButtonTapped() {
+        isFiltered = false
+        mainTextField.resignFirstResponder()
+        mainTextField.text = ""
+        mainCollectionView.reloadData()
+    }
+    
+    @objc func chooseButtonTapped() {
+        let selectedRowText = mainViewModel?.categoryList[mainPickerView.selectedRow(inComponent: 0)]
+        mainTextField.text = selectedRowText
+        filterMainResultList(selectedRowText)
+        mainTextField.resignFirstResponder()
+    }
+    
+    func filterMainResultList(_ selectedText: String?) {
+        isFiltered = true
+        mainViewModel?.filteredMainResultList = mainViewModel?.mainResultList.filter { $0.sectionName == selectedText } ?? []
+        mainViewModel?.filteredBackgroundColorList = mainViewModel?.backgroundColorList.filter { $0.key == selectedText } ?? [:]
+        mainCollectionView.reloadData()
     }
 }
 
@@ -67,13 +115,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainViewModel?.backgroundColorList.count ?? 0
+        if isFiltered {
+            return mainViewModel?.filteredMainResultList.count ?? 0
+        } else {
+            return mainViewModel?.mainResultList.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.mainCollectionViewCellId, for: indexPath) as? MainCollectionViewCell {
-            cell.containerView.backgroundColor = mainViewModel?.backgroundColorList[indexPath.row]
-            cell.titleLabel.text = mainViewModel?.mainResultList[indexPath.row].webTitle
+            if isFiltered {
+                cell.titleLabel.text = mainViewModel?.filteredMainResultList[indexPath.row].webTitle
+                cell.containerView.backgroundColor = mainViewModel?.filteredBackgroundColorList[mainViewModel?.filteredMainResultList[indexPath.row].sectionName ?? ""]
+            } else {
+                cell.titleLabel.text = mainViewModel?.mainResultList[indexPath.row].webTitle
+                cell.containerView.backgroundColor = mainViewModel?.backgroundColorList[mainViewModel?.mainResultList[indexPath.row].sectionName ?? ""]
+            }
             return cell
         } else {
             return UICollectionViewCell()
@@ -105,9 +162,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageWidth: CGFloat = getCollectionViewItemWidth() + getCollectionViewSpacing()
         let currentPageOffset: CGFloat = scrollView.contentOffset.x
-        let targetOffset: CGFloat = targetContentOffset.pointee.x
+        let targetPageOffset: CGFloat = targetContentOffset.pointee.x
         var newPageOffset: CGFloat = 0
-        if targetOffset > currentPageOffset {
+        if targetPageOffset > currentPageOffset {
             newPageOffset = ceil(currentPageOffset / pageWidth) * pageWidth
         } else {
             newPageOffset = floor(currentPageOffset / pageWidth) * pageWidth
@@ -146,25 +203,42 @@ extension MainViewController: MainViewModelDelegate {
         for result in mainResult {
             switch result.sectionName {
             case MainBackgroundColorType.sport.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.sport.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.sport.rawValue] = MainBackgroundColorType.sport.colorValue
             case MainBackgroundColorType.usNews.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.usNews.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.usNews.rawValue] = MainBackgroundColorType.usNews.colorValue
             case MainBackgroundColorType.environment.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.environment.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.environment.rawValue] = MainBackgroundColorType.environment.colorValue
             case MainBackgroundColorType.fashion.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.fashion.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.fashion.rawValue] = MainBackgroundColorType.fashion.colorValue
             case MainBackgroundColorType.politics.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.politics.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.politics.rawValue] = MainBackgroundColorType.politics.colorValue
             case MainBackgroundColorType.music.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.music.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.music.rawValue] = MainBackgroundColorType.music.colorValue
             case MainBackgroundColorType.ukNews.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.ukNews.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.ukNews.rawValue] = MainBackgroundColorType.ukNews.colorValue
             case MainBackgroundColorType.worldNews.rawValue:
-                mainViewModel?.backgroundColorList.append(MainBackgroundColorType.worldNews.colorValue)
+                mainViewModel?.backgroundColorList[MainBackgroundColorType.worldNews.rawValue] = MainBackgroundColorType.worldNews.colorValue
             default:
                 return
             }
         }
         mainCollectionView.reloadData()
+    }
+}
+
+// MARK: - MainViewController: UIPickerViewDelegate, UIPickerViewDataSource -
+
+extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return mainViewModel?.categoryList.count ?? 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return mainViewModel?.categoryList[row]
     }
 }
