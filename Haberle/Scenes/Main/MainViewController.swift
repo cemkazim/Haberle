@@ -30,7 +30,6 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     var mainViewModel: MainViewModel?
-    var minimumLineSpacing: CGFloat = 30
     
     // MARK: - Lifecycles -
     
@@ -56,6 +55,10 @@ class MainViewController: UIViewController {
             mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    func getMinimumLineSpacing() -> CGFloat {
+        return (3 * view.frame.width / 4) / 10
     }
 }
 
@@ -94,11 +97,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 325, height: 550)
+        return CGSize(width: 3 * view.frame.width / 4, height: 2 * view.frame.height / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return minimumLineSpacing
+        return getMinimumLineSpacing()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -106,7 +109,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let pageWidth: CGFloat = 325 + minimumLineSpacing
+        let pageWidth: CGFloat = 3 * view.frame.width / 4 + getMinimumLineSpacing()
         let currentPageOffset: CGFloat = scrollView.contentOffset.x
         let targetOffset: CGFloat = targetContentOffset.pointee.x
         var newPageOffset: CGFloat = 0
