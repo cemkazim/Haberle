@@ -56,10 +56,6 @@ class MainViewController: UIViewController {
             mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    func getMinimumLineSpacing() -> CGFloat {
-        return (3 * view.frame.width / 4) / 10
-    }
 }
 
 // MARK: - MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate -
@@ -91,25 +87,23 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             newsWebView.webView.load(loadedURL)
             let rootViewController = UINavigationController(rootViewController: newsWebView)
             present(rootViewController, animated: true, completion: nil)
-        } else {
-            print("error")
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 3 * view.frame.width / 4, height: 2 * view.frame.height / 3)
+        return CGSize(width: getCollectionViewItemWidth(), height: getCollectionViewItemHeight())
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return getMinimumLineSpacing()
+        return getCollectionViewSpacing()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 45)
+        return UIEdgeInsets(top: 0, left: getCollectionViewInset(), bottom: 0, right: getCollectionViewInset())
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let pageWidth: CGFloat = 3 * view.frame.width / 4 + getMinimumLineSpacing()
+        let pageWidth: CGFloat = getCollectionViewItemWidth() + getCollectionViewSpacing()
         let currentPageOffset: CGFloat = scrollView.contentOffset.x
         let targetOffset: CGFloat = targetContentOffset.pointee.x
         var newPageOffset: CGFloat = 0
@@ -125,6 +119,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         targetContentOffset.pointee.x = currentPageOffset
         scrollView.setContentOffset(CGPoint(x: newPageOffset, y: 0), animated: true)
+    }
+    
+    func getCollectionViewItemWidth() -> CGFloat {
+        return 3 * view.frame.width / 4
+    }
+    
+    func getCollectionViewItemHeight() -> CGFloat {
+        return 2 * view.frame.height / 3
+    }
+    
+    func getCollectionViewSpacing() -> CGFloat {
+        return getCollectionViewItemWidth() / 10
+    }
+    
+    func getCollectionViewInset() -> CGFloat {
+        return 3 * view.frame.width / 25
     }
 }
 
