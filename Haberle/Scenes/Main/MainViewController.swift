@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifiers.mainCollectionViewCellId)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.backgroundView = UIView.init(frame: .zero)
         collectionView.decelerationRate = .fast
@@ -31,13 +30,20 @@ class MainViewController: UIViewController {
     }()
     lazy var mainPickerView: UIPickerView = {
         let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.delegate = self
         pickerView.dataSource = self
         return pickerView
     }()
-    var isFiltered = false
-    var mainTextField = UITextField()
+    lazy var mainTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = Constants.chooseACategoryText
+        textField.textAlignment = .center
+        return textField
+    }()
     var mainViewModel: MainViewModel?
+    var isFiltered = false
     
     // MARK: - Lifecycles -
     
@@ -66,8 +72,6 @@ class MainViewController: UIViewController {
     }
     
     func setupPickerView() {
-        mainTextField.placeholder = Constants.chooseACategoryText
-        mainTextField.textAlignment = .center
         view.addSubview(mainTextField)
         navigationItem.titleView = mainTextField
         mainTextField.inputView = mainPickerView
